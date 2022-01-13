@@ -74,14 +74,14 @@ create table tbl_user
     primary key (user_id)
 ) engine = InnoDB;
 
-alter table tbl_user
-    drop index user_nickname_unique;
+# alter table tbl_user
+#     drop index user_nickname_unique;
 
 alter table tbl_user
     add constraint user_nickname_unique unique (nickname);
 
-alter table tbl_user
-    drop index user_email_unique;
+# alter table tbl_user
+#     drop index user_email_unique;
 
 alter table tbl_user
     add constraint user_email_unique unique (email);
