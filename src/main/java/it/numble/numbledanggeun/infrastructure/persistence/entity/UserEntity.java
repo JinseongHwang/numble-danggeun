@@ -1,5 +1,6 @@
 package it.numble.numbledanggeun.infrastructure.persistence.entity;
 
+import it.numble.numbledanggeun.domain.user.model.UserRole;
 import it.numble.numbledanggeun.infrastructure.persistence.BaseEntity;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -55,13 +57,23 @@ public class UserEntity extends BaseEntity {
     @Column(name = "profile_image_url")
     private String profileImageUrl;
 
+    @NotBlank
+    @Column(name = "refresh_token", length = 500)
+    private String refreshToken;
+
+    @NotNull
+    @Column(name = "role")
+    private UserRole role;
+
     @Builder
-    public UserEntity(String email, String password, String username, String phoneNumber, String nickname) {
+    public UserEntity(String email, String password, String username, String phoneNumber, String nickname, String refreshToken) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.nickname = nickname;
         this.profileImageUrl = "~~s3.default.profile.image.png";
+        this.refreshToken = refreshToken;
+        this.role = UserRole.ROLE_USER;
     }
 }
